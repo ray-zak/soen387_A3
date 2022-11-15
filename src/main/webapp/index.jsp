@@ -24,10 +24,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/A2_war_exploded/Student_Pages/Student_Login.jsp">Student</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/Student_Pages/Student_Login.jsp" >Student</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/A2_war_exploded/Admin_Pages/Admin_Login.jsp">Admin</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin_Pages/Admin_Login.jsp" >Admin</a>
             </li>
         </ul>
 

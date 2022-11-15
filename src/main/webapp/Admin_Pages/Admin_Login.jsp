@@ -6,11 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    if(session.getAttribute("verifiedAdmin") != null){
+
+       session.removeAttribute("verifiedAdmin");
+
+
+    }
+%>
 <html>
 <head>
     <title>Admin Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="new_style.css">
+    <link rel="stylesheet" href="styles/new_style.css">
 </head>
 
 <body>
@@ -24,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/A2_war_exploded/index.jsp">Home</a>
+                <a class="nav-link" href="../index.jsp">Home</a>
             </li>
         </ul>
 
@@ -42,7 +51,7 @@
             <div class="col-lg-7 px-5 pt-5">
                 <h1 class=" font-weight-bold py-3 text-center">Please Log in</h1>
 
-                <form action="Adminlogin.php" method="post">
+                <form action="<%= request.getContextPath() %>/AdminServlet" method="post">
 
                     <div class="form-row">
                         <div class="col-lg-7">
@@ -54,13 +63,13 @@
                         <div class="col-lg-7">
 
 
-                            <button type="submit" name="submit" value="Submit" class="btn1 mt-3 mb-4">Login </button>
+                            <button type="submit" name="loginAdmin" value="Submit" class="btn1 mt-3 mb-4">Login </button>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-7">
 
-                            <p>Register an Employee Here: <a href="./AdminRegister.php">Register</a></p>
+                            <p>Register an Employee Here: <a href="./AdminRegister.jsp">Register</a></p>
 
                         </div>
                     </div>

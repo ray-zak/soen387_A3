@@ -5,6 +5,12 @@ import java.util.LinkedList;
 public class course {
 
     private String CourseCode;
+
+    private  String Title;
+
+    private String Semester;
+
+    private String Days;
     private String instructor;
     private String Room;
     private String StartDate;
@@ -14,8 +20,11 @@ public class course {
     private LinkedList<Student> registeredstudents;
 
 
-    public course (String coursecode, String instructor, String room , String startdate, String enddate , String time){
+    public course (String coursecode,String title ,String semester, String days,String instructor, String room , String startdate, String enddate , String time){
         this.CourseCode = coursecode;
+        this.Semester = semester;
+        this.Days = days;
+        this.Title = title;
         this.instructor = instructor;
         this.StartDate = startdate;
         this.Room = room;
@@ -32,6 +41,15 @@ public class course {
     public void setCourseCode(String courseCode) {
         this.CourseCode = courseCode;
     }
+
+    public String getTitle() {return  this.Title;}
+    public void setTitle(String title) {this.Title = title;}
+
+    public String getSemester() {return  this.Semester;}
+    public void setSemester(String semester) {this.Semester = semester;}
+
+    public String getDays() {return  this.Days;}
+    public void setDays(String days) {this.Days = days;}
 
     public String getInstructor() {
         return this.instructor;
