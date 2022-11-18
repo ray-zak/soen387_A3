@@ -39,7 +39,7 @@
     <div class="row justify-content-center my-5">
 
         <div class="col-lg-6">
-            <form method="post" action="">
+            <form method="post" action="/A2_war_exploded/ShowCourses">
                 <label class="form-label"> Student ID:</label>
                 <input type="number" name="StudentID" placeholder="Student ID" class="form-control" />
 
@@ -73,7 +73,7 @@
     <div class="row justify-content-center my-5">
 
         <div class="col-lg-6">
-            <form method="post" action="">
+            <form method="post" action="/A2_war_exploded/MyCourses">
                 <label class="form-label"> Student ID:</label>
                 <input type="number" name="StudentID" placeholder="Student ID" class="form-control" />
 

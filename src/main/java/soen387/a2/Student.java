@@ -2,6 +2,7 @@ package soen387.a2;
 
 
 
+import java.sql.Date;
 import java.util.LinkedList;
 
 public class Student {
@@ -9,7 +10,7 @@ public class Student {
     private int ID;
     private String Firstname;
     private String Lastname;
-    private String DOB;
+    private Date DOB;
     private String Address;
     private String Email;
     private int phone;
@@ -19,7 +20,7 @@ public class Student {
 
 
 
-    public Student (int ID, String firstname, String lastname, String DOB, String address , String Email, int phone){
+    public Student (int ID, String firstname, String lastname, Date DOB, String address , String Email, int phone){
         this.ID = ID;
         this.Firstname = firstname;
         this.Lastname = lastname;
@@ -50,7 +51,7 @@ public class Student {
         this.Lastname = lastname;
     }
 
-    public void setDOB(String DOB) {
+    public void setDOB(Date DOB) {
         this.DOB = DOB;
     }
 
@@ -75,7 +76,7 @@ public class Student {
         return this.Lastname;
     }
 
-    public String getDOB() {
+    public Date getDOB() {
         return this.DOB;
     }
 
@@ -100,14 +101,6 @@ public class Student {
     }
 
 
-    // register in a course
-public void registerCourse(course course){
 
-    }
-
-// Drop a course
-    public void dropCourse(course course){
-
-    }
 
 }

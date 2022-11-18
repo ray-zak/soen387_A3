@@ -1,30 +1,31 @@
 package soen387.a2;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.LinkedList;
 
 public class course {
 
     private String CourseCode;
 
-    private  String Title;
-
     private String Semester;
 
-    private String Days;
+    private String days;
+    private String Title;
     private String instructor;
     private String Room;
-    private String StartDate;
-    private String EndDate;
-    private String Time;
+    private Date StartDate;
+    private Date EndDate;
+    private Time  Time;
 
     private LinkedList<Student> registeredstudents;
 
 
-    public course (String coursecode,String title ,String semester, String days,String instructor, String room , String startdate, String enddate , String time){
+    public course (String coursecode,String title,String semester,String days, String instructor, String room , Date startdate, Date enddate , Time time){
         this.CourseCode = coursecode;
-        this.Semester = semester;
-        this.Days = days;
         this.Title = title;
+        this.Semester= semester;
+        this.days= days;
         this.instructor = instructor;
         this.StartDate = startdate;
         this.Room = room;
@@ -33,23 +34,38 @@ public class course {
         registeredstudents = null;
     }
 
+    public String getDays() {
+        return this.days;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
 
     public String getCourseCode() {
         return this.CourseCode;
     }
 
+
+    public String getTitle() {
+        return this.Title;
+    }
+
+    public void setTitle(String title) {
+        this.Title = title;
+    }
+
+    public String getSemester() {
+        return this.Semester;
+    }
+
+    public void setSemester(String semester) {
+        this.Semester = semester;
+    }
+
     public void setCourseCode(String courseCode) {
         this.CourseCode = courseCode;
     }
-
-    public String getTitle() {return  this.Title;}
-    public void setTitle(String title) {this.Title = title;}
-
-    public String getSemester() {return  this.Semester;}
-    public void setSemester(String semester) {this.Semester = semester;}
-
-    public String getDays() {return  this.Days;}
-    public void setDays(String days) {this.Days = days;}
 
     public String getInstructor() {
         return this.instructor;
@@ -67,27 +83,27 @@ public class course {
         this.Room = room;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return this.StartDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.StartDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return this.EndDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.EndDate = endDate;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return this.Time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Time time) {
         this.Time = time;
     }
 
