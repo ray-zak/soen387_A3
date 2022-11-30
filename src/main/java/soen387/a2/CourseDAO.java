@@ -33,7 +33,7 @@ public class CourseDAO {
                 String title = result1.getString("Title");
                 String semester = result1.getString("Semester");
                 String days = result1.getString("days");
-                Time time = result1.getTime("Time");
+                String time = result1.getString("Time");
                 String instructor = result1.getString("instructor");
                 String room = result1.getString("room");
                 Date startdate = result1.getDate("StartDate");
@@ -95,7 +95,7 @@ public class CourseDAO {
                 String title = result.getString("Title");
                 String semester = result.getString("Semester");
                 String days = result.getString("days");
-                Time time = result.getTime("Time");
+                String time = result.getString("Time");
                 String instructor = result.getString("instructor");
                 String room = result.getString("room");
                 Date startdate = result.getDate("StartDate");
