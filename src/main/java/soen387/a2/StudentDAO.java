@@ -70,7 +70,7 @@ public class StudentDAO {
                        String title = result2.getString("Title");
                        String semester = result2.getString("Semester");
                        String days = result2.getString("days");
-                       Time time = result2.getTime("Time");
+                       String time = result2.getString("Time");
                        String instructor = result2.getString("instructor");
                        String room = result2.getString("room");
                        Date startdate = result2.getDate("StartDate");
