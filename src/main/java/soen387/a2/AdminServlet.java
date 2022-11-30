@@ -215,6 +215,9 @@ public class AdminServlet extends HttpServlet {
 
                }
                else{
+                   
+                   Date strdate = Date.valueOf(startDate);
+                   Date enddate = Date.valueOf(endDate);
 
                    course newCourse = new course(courseCode,title,semester,days,instructor,room,startDate,endDate,time);
 
