@@ -16,12 +16,12 @@ public class course {
     private String Room;
     private Date StartDate;
     private Date EndDate;
-    private Time  Time;
+    private String  Time;
 
     private LinkedList<Student> registeredstudents;
 
 
-    public course (String coursecode,String title,String semester,String days, String instructor, String room , Date startdate, Date enddate , Time time){
+    public course (String coursecode,String title,String semester,String days, String instructor, String room , Date startdate, Date enddate , String time){
         this.CourseCode = coursecode;
         this.Title = title;
         this.Semester= semester;
@@ -99,11 +99,11 @@ public class course {
         this.EndDate = endDate;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return this.Time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.Time = time;
     }
 
