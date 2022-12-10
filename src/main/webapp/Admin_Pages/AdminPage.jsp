@@ -31,10 +31,10 @@ response.sendRedirect("/soen387_A2/Admin_Pages/Admin_Login.jsp");
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="../index.jsp">Home</a>
+          <a class="nav-link" href="/A2_war_exploded/index.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./Admin_Login.jsp">Admin Login</a>
+          <a class="nav-link" href="/A2_war_exploded/Admin_Pages/Admin_Login.jsp">Admin Login</a>
         </li>
       </ul>
 
@@ -52,8 +52,8 @@ response.sendRedirect("/soen387_A2/Admin_Pages/Admin_Login.jsp");
       <div class="row justify-content-center my-5">
         <div class="col-lg-6">
           <button class=" btn1 btn-lg  mt-3 mb-4 " onclick="window.location='./CreateCourse.jsp';">Create a Course</button>
-          <button class=" btn1 btn-lg  mt-3 mb-4 " onclick="window.location='./CourseTakenByStudent.php';">search courses taken by student</button>
-          <button class=" btn1 btn-lg  mt-3 mb-4" onclick="window.location='./StudentsInCourse.php';">search student in course</button>
+          <button class=" btn1 btn-lg  mt-3 mb-4 " onclick="window.location='./CourseTakenByStudent.jsp';">search courses taken by student</button>
+          <button class=" btn1 btn-lg  mt-3 mb-4" onclick="window.location='./StudentsInCourse.jsp';">search student in course</button>
         </div>
       </div>
     </div>

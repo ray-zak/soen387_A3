@@ -18,7 +18,7 @@ if(session.getAttribute("verifiedAdmin") == null){
     <meta charset="UTF-8">
     <title> Course Page </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/new_style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/Admin_Pages/styles/new_style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light ">
@@ -30,7 +30,7 @@ if(session.getAttribute("verifiedAdmin") == null){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.jsp">Home</a>
+                    <a class="nav-link" href="/A2_war_exploded/index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./Admin_Login.jsp">Admin Login</a>
@@ -47,7 +47,7 @@ if(session.getAttribute("verifiedAdmin") == null){
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-lg-5">
-                    <img src="img/course-selection-high-schol-Google-Search.png" class="img-fluid mt-6 ml-5" alt="">
+                    <img src="<%=request.getContextPath()%>/Admin_Pages/img/course-selection-high-schol-Google-Search.png" class="img-fluid mt-6 ml-5" alt="">
                 </div>
 
                 <div class="col-lg-7 px-5 pt-5">

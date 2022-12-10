@@ -10,7 +10,11 @@ public class AdminDOA {
 
     public int verify_Admin(int adminID){
 
-        String SELECT_ADMIN_SQL = "SELECT * FROM assignment1.administrator WHERE " + "EmployementID='" + adminID + "';";
+        //String SELECT_ADMIN_SQL = "SELECT * FROM Assignment1.Administrator WHERE " + "EmployementID='" + adminID + "';";
+        String SELECT_ADMIN_SQL = "  select Administrator.AdministratorID, FirstName, LastName, Address, Email, Phone,DOB\n" +
+                " from Assignment1.Person, Assignment1.Administrator\n" +
+                " where Person.idPerson = Administrator.PersonID and Administrator.AdministratorID ="+adminID+";";
+
 
         ResultSet result;
         Connection conn = DB_Connection.connectDB();
@@ -40,9 +44,14 @@ public class AdminDOA {
 
     public int registerAdmin(Admin admin)  {
 
-        String INSERT_USERS_SQL ="INSERT INTO assignment1.administrator" + " (EmployementID,Address,DOB,Email,Phone,FirstName,LastName) VALUES " +
-                " (?,?,?,?,?,?,?);";
+        //String INSERT_USERS_SQL ="INSERT INTO Assignment1.Administrator" + " (EmployementID,Address,DOB,Email,Phone,FirstName,LastName) VALUES " +
+             //   " (?,?,?,?,?,?,?);";
 
+        String INSERT_USERS_SQL = " insert into Assignment1.Person(FirstName,LastName,Address,Email,Phone,DOB) values " +
+                "(?,?,?,?,?,?);\n";
+
+        String insert_users_sql2 =  "insert into Assignment1.Administrator(PersonID, AdministratorID)" +
+                " Values((select idPerson from Assignment1.Person where FirstName ="+admin.getFirstname()+" and LastName = "+admin.getLastname()+" and Email = "+admin.getEmail()+") ,"+admin.getAdminID()+");";
 
         int result = 0;
         Connection conn = DB_Connection.connectDB();
@@ -51,16 +60,20 @@ public class AdminDOA {
         try{
             PreparedStatement preparedStatement = conn.prepareStatement((INSERT_USERS_SQL));
 
-            preparedStatement.setInt(1, admin.getID());
-            preparedStatement.setString(2, admin.getAddress());
-            preparedStatement.setString(3, admin.getDOB());
+            //preparedStatement.setInt(1, admin.getID());
+            preparedStatement.setString(3, admin.getAddress());
+            preparedStatement.setString(6, admin.getDOB());
             preparedStatement.setString(4, admin.getEmail());
             preparedStatement.setInt(5, admin.getPhone());
-            preparedStatement.setString(6, admin.getFirstname());
-            preparedStatement.setString(7, admin.getLastname());
+            preparedStatement.setString(1, admin.getFirstname());
+            preparedStatement.setString(2, admin.getLastname());
 
             System.out.println(preparedStatement);
             result = preparedStatement.executeUpdate();
+
+
+            PreparedStatement preparedStatement2 = conn.prepareStatement((insert_users_sql2));
+            int result2 = preparedStatement.executeUpdate();
 
 
         }catch (SQLException e) {
@@ -74,7 +87,7 @@ public class AdminDOA {
 
     public int verifyCourse(String courseCode){
 
-        String SELECT_COURSE_SQL = "SELECT * FROM assignment1.course WHERE " + "CourseCode='" +  courseCode+ "';";
+        String SELECT_COURSE_SQL = "SELECT * FROM Assignment1.Course WHERE " + "CourseCode='" +  courseCode+ "';";
 
         ResultSet result;
         Connection conn = DB_Connection.connectDB();
@@ -104,7 +117,7 @@ public class AdminDOA {
     }
     public int createCourse(course newCourse){
 
-        String INSERT_COURSE_SQL ="INSERT INTO assignment1.course" + " (CourseCode,Title,Semester,days,time,instructor,room,StartDate,EndDate) VALUES " +
+        String INSERT_COURSE_SQL ="INSERT INTO Assignment1.Course" + " (CourseCode,Title,Semester,days,time,instructor,room,StartDate,EndDate) VALUES " +
                 " (?,?,?,?,?,?,?,?,?);";
 
         int result = 0;
@@ -119,11 +132,11 @@ public class AdminDOA {
             preparedStatement.setString(2,newCourse.getTitle());
             preparedStatement.setString(3,newCourse.getSemester());
             preparedStatement.setString(4, newCourse.getDays());
-            preparedStatement.setString(5, newCourse.getTime());
+            preparedStatement.setString(5, newCourse.getTime().toString());
             preparedStatement.setString(6, newCourse.getInstructor());
             preparedStatement.setString(7, newCourse.getRoom());
-            preparedStatement.setString(8, newCourse.getStartDate());
-            preparedStatement.setString(9, newCourse.getEndDate());
+            preparedStatement.setString(8, newCourse.getStartDate().toString());
+            preparedStatement.setString(9, newCourse.getEndDate().toString());
 
             System.out.println(preparedStatement);
             result = preparedStatement.executeUpdate();

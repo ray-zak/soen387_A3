@@ -6,7 +6,13 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.sql.Connection;
+import java.sql.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 @WebServlet(name = "AdminServlet", value = "/AdminServlet")
 public class AdminServlet extends HttpServlet {
@@ -20,6 +26,110 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int formNumber = Integer.parseInt(request.getParameter("formNumber"));
+
+        if(formNumber==1) {
+            StudentDAO sd= new StudentDAO();
+            Integer[] v =  sd.fetchAllStudentIDS() ;
+            System.out.println(v[0]);
+            HttpSession session = request.getSession();
+
+            session.setAttribute("studentList", v);
+            if(session.getAttribute("courses")!=null){
+                session.removeAttribute("courses");}
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/Admin_Pages/CourseTakenByStudent.jsp");
+            rd.forward(request, response);
+        }
+        else if (formNumber==0){
+            HttpSession session = request.getSession();
+            CourseDAO cd= new CourseDAO();
+            String[] u= cd.fetchAllCourseCodes();
+            System.out.println(u[0]);
+            session.setAttribute("courseList", u);
+            if(session.getAttribute("studentslist")!=null){
+                session.removeAttribute("studentslist");}
+            request.setAttribute("identification", u);
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/Admin_Pages/StudentsInCourse.jsp");
+            rd.forward(request, response);
+
+        }
+        else if (formNumber==2){
+
+            int StudentID = Integer.parseInt(request.getParameter("student"));
+            System.out.println(StudentID);
+            ArrayList<String> courseResponse = new ArrayList<String>();
+
+            RegisteredInDOA rid= new RegisteredInDOA();
+            ResultSet r = rid.getCourses(StudentID);
+
+
+
+            while(true){
+                try {
+                    if (!r.next()) {break;}
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    courseResponse.add(r.getString("CourseCode")) ;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+
+            }
+
+            HttpSession session = request.getSession();
+            System.out.println(courseResponse);
+
+            session.setAttribute("courses", courseResponse);
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/Admin_Pages/CourseTakenByStudent.jsp");
+            rd.forward(request, response);
+
+
+        }
+        else if (formNumber==3){
+
+
+            String courseCode = request.getParameter("course");
+            System.out.println("here"+courseCode);
+            ArrayList<Integer> studentResponse = new ArrayList<Integer>();
+
+            RegisteredInDOA rid= new RegisteredInDOA();
+            ResultSet r = rid.getStudents(courseCode);
+
+
+
+            while(true){
+                try {
+                    if (!r.next()) {break;}
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    studentResponse.add(r.getInt("StudentID")) ;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+
+            }
+
+            HttpSession session = request.getSession();
+            System.out.println(studentResponse);
+
+            session.setAttribute("studentslist",studentResponse );
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/Admin_Pages/StudentsInCourse.jsp");
+            rd.forward(request, response);
+
+
+
+
+        }
     }
 
     @Override
@@ -37,7 +147,7 @@ public class AdminServlet extends HttpServlet {
               if (adminDOA.verify_Admin(adminID) == 1){
 
 
-                  response.sendRedirect("/soen387_A2/Admin_Pages/AdminPage.jsp");
+                  response.sendRedirect("/A2_war_exploded/Admin_Pages/AdminPage.jsp");
 
                   session.setAttribute("verifiedAdmin",adminID);
 
@@ -45,7 +155,7 @@ public class AdminServlet extends HttpServlet {
                }
               else{
 
-                  response.sendRedirect("/soen387_A2/Admin_Pages/Admin_Login.jsp");
+                  response.sendRedirect("/A2_war_exploded/Admin_Pages/Admin_Login.jsp");
               }
 
 
@@ -215,11 +325,12 @@ public class AdminServlet extends HttpServlet {
 
                }
                else{
-                   
                    Date strdate = Date.valueOf(startDate);
                    Date enddate = Date.valueOf(endDate);
 
-                   course newCourse = new course(courseCode,title,semester,days,instructor,room,startDate,endDate,time);
+
+
+                   course newCourse = new course(courseCode,title,semester,days,instructor,room,strdate,enddate,time);
 
                    adminDOA.createCourse(newCourse);
                    request.setAttribute("courseCreationMessage", "Course has been created");

@@ -30,7 +30,14 @@ public class StudentDAO {
 
         conn = DB_Connection.connectDB();
 
-        String query1 = "Select * from Assignment1.Student";
+        //String query1 = "Select * from Assignment1.Student";
+
+        String query1 = " select Student.StudentID, FirstName, LastName,Address,Email,Phone, DOB \n" +
+                " from Assignment1.Person, Assignment1.Student\n" +
+                " where Student.PersonID = Person.idPerson;";
+
+
+
         String query2 = "Select StudentID, Course.CourseCode, Title, Semester,days,Time,instructor,room,StartDate,EndDate\n" +
                 " from Assignment1.Course,Assignment1.Registeredin where Registeredin.CourseCode = Course.CourseCode;";
 
@@ -249,6 +256,61 @@ public static boolean DropACourse(int studentid,String coursecode){
         return dropped;
 
 }
+
+
+    public Integer[] fetchAllStudentIDS(){
+        String SELECT_ADMIN_SQL= "select StudentID from Assignment1.Student";
+
+        ResultSet result;
+        Connection conn = DB_Connection.connectDB();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement((SELECT_ADMIN_SQL));
+            System.out.println(preparedStatement);
+
+            result = preparedStatement.executeQuery();
+            // System.out.println(result);
+            System.out.println(result.isBeforeFirst());
+
+
+
+            ArrayList<Integer> idList= new ArrayList<Integer>();
+
+            //RegisteredInDOA rid= new RegisteredInDOA();
+
+
+
+
+            while(true){
+                try {
+                    if (!result.next()) {break;}
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    idList.add(result.getInt("StudentID")) ;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+
+            }
+            Integer[] TempArr = new Integer[idList.size()];
+            TempArr = idList.toArray(TempArr);
+
+            return TempArr;
+
+
+        } catch (SQLException e) {
+            // process sql exception
+            /// printSQLException(e);
+        }
+
+
+        return null;
+
+    }
 
 
 

@@ -18,11 +18,13 @@ public class CourseDAO {
 
         conn = DB_Connection.connectDB();
         String query1 = "Select * from Assignment1.course";
-        String query2 = "select CourseCode, Student.StudentID, FirstName, LastName,Address,Email,Phone, DOB \n" +
-                "from Assignment1.Registeredin , Assignment1.Student\n" +
-                "where Registeredin.StudentID = Student.StudentID;";
+//        String query2 = "select CourseCode, Student.StudentID, FirstName, LastName,Address,Email,Phone, DOB \n" +
+//                "from Assignment1.Registeredin , Assignment1.Student\n" +
+//                "where Registeredin.StudentID = Student.StudentID;";
 
-
+        String query2 =  " select CourseCode, Student.StudentID, FirstName, LastName,Address,Email,Phone, DOB " +
+                "from Assignment1.Person ,Assignment1.Registeredin , Assignment1.Student " +
+                "where Registeredin.StudentID = Student.StudentID and Student.PersonID = Person.idPerson;";
         try{
             PreparedStatement stmt = conn.prepareStatement(query1);
             ResultSet result1 = stmt.executeQuery();
@@ -123,6 +125,59 @@ public class CourseDAO {
     }
 
 
+    public String[] fetchAllCourseCodes(){
+        String SELECT_ADMIN_SQL= "select CourseCode from Assignment1.Course";
+
+        ResultSet result;
+        Connection conn = DB_Connection.connectDB();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement((SELECT_ADMIN_SQL));
+            System.out.println(preparedStatement);
+
+            result = preparedStatement.executeQuery();
+            // System.out.println(result);
+            System.out.println(result.isBeforeFirst());
+
+
+
+            ArrayList<String> courseList= new ArrayList<String>();
+
+            RegisteredInDOA rid= new RegisteredInDOA();
+
+
+
+
+            while(true){
+                try {
+                    if (!result.next()) {break;}
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    courseList.add(result.getString("CourseCode")) ;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+
+            }
+            String[] TempArr = new String[courseList.size()];
+            TempArr = courseList.toArray(TempArr);
+
+            return TempArr;
+
+
+        } catch (SQLException e) {
+            // process sql exception
+            /// printSQLException(e);
+        }
+
+
+        return null;
+
+    }
 
 
 
